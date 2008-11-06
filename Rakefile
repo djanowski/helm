@@ -29,3 +29,8 @@ task :gemspec do
     f.write ERB.new(File.read("#{gem_spec_file}.erb")).result(binding)
   end
 end
+
+desc "Builds and installs the gem."
+task :install => :repackage do
+  `sudo gem install pkg/#{gem_spec.name}-#{gem_spec.version}.gem`
+end
