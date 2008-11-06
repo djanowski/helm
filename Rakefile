@@ -2,20 +2,20 @@ require 'rake'
 require 'rake/gempackagetask'
 require 'rake/clean'
 require 'spec/rake/spectask'
-require 'spec/translator'
 
 gem_spec = Gem::Specification.new do |s|
-  s.name = 'boat'
+  s.name = 'helm'
   s.version = '0.0.1'
-  s.summary = %{boat}
-  s.description = %{}
+  s.summary = %{helm}
+  s.description = %{A command-line tool for Lighthouse.}
   s.author = "Damian Janowski"
   s.email = "damian.janowski@gmail.com"
   #s.homepage = ""
 
   #s.test_files = FileList['test/**/*']
 
-  s.files = FileList['lib/**/*.rb', 'README', 'doc/**/*.*']
+  s.files = FileList['bin/**', 'lib/**/*.rb', 'README', 'doc/**/*.*']
+
   s.require_paths << 'lib'
   
   FileList['lib/**'].inject(s.require_paths) do |require_paths,path|
@@ -25,10 +25,10 @@ gem_spec = Gem::Specification.new do |s|
 
   s.require_paths.uniq!
   
-  #s.bindir = "bin"
-  #s.executables = "boat"
+  s.bindir = "bin"
+  s.executables = "helm"
   #s.default_executable = ""
-  #s.add_dependency("", "")
+  s.add_dependency("choice", "0.1.2")
   #s.add_dependency("", "")
   #s.extensions << ""
   #s.extra_rdoc_files = ["README"]
@@ -37,7 +37,7 @@ gem_spec = Gem::Specification.new do |s|
   #s.required_ruby_version = ">= 1.8.5"
   #s.requirements << "An ice cold beer."
   #s.requirements << "Some free time!"
-  #s.rubyforge_project = "boat"
+  #s.rubyforge_project = "helm"
 end
 
 Rake::GemPackageTask.new(gem_spec) do |pkg|

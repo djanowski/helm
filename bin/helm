@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+require File.dirname(__FILE__) + '/../lib/helm'
+
+require 'yaml'
+
+def load_config(file)
+  file = File.expand_path(file)
+
+  return unless File.exist?(file)
+
+  yaml = YAML::load_file(file)
+  
+  yaml = yield(yaml) if block_given?
+
+  yaml.each do |k,v|
+    ARGV << "--#{k}=#{v}"
+  end if yaml
+
+  yaml
+end
+
+local_config = load_config('.helm_config')
+
+load_config('~/.helm_config') do |opts|
+  opts[local_config['url']]
+end
+
+Helm::Commands.const_get(ARGV.first.capitalize).new(Helm::Session.new).run
