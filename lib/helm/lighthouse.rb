@@ -195,7 +195,12 @@ module Lighthouse
     end
     
     def description
-      @description ||= versions.detect {|v| v.body && !v.body.empty? }.body
+      unless @description
+        version = versions.detect {|v| v.attributes['body'] && !v.attributes['body'].empty? }
+        @description = version.body if version
+      end
+
+      @description
     end
 
     def save_with_tags

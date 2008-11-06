@@ -4,7 +4,7 @@ module Helm
       def run
         ticket = session.ticket
 
-        puts ticket.title
+        puts "##{ticket.id} #{ticket.title}"
 
         if ticket.description
           puts "=="
