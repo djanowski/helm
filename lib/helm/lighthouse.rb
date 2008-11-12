@@ -135,11 +135,19 @@ module Lighthouse
     def changesets(options = {})
       Changeset.find(:all, :params => options.update(:project_id => id))
     end
+
+    def to_s
+      name
+    end
   end
 
   class User < Base
     def memberships
       Membership.find(:all, :params => {:user_id => id})
+    end
+
+    def to_s
+      name
     end
   end
   
@@ -187,6 +195,10 @@ module Lighthouse
     def id
       attributes['number'] ||= nil
       number
+    end
+
+    def to_s
+      title
     end
 
     def tags
@@ -249,6 +261,10 @@ module Lighthouse
   
   class Milestone < Base
     site_format << '/projects/:project_id'
+
+    def to_s
+      title
+    end
   end
   
   class Bin < Base

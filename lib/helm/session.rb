@@ -41,6 +41,14 @@ module Helm
       Lighthouse::Ticket.find(id || ticket_id, :params => {:project_id => project.id})
     end
 
+    def milestone(id = nil)
+      if id
+        Lighthouse::Milestone.find(id)
+      else
+        @milestone ||= Lighthouse::Milestone.find(:all, :params => {:project_id => project.id}).detect {|m| m.title == ARGV[2] }
+      end
+    end
+
     def ticket_id
       ARGV[1].to_i
     end

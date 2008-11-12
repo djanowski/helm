@@ -9,7 +9,7 @@ require 'yaml'
 def load_config(file)
   file = File.expand_path(file)
 
-  return unless File.exist?(file)
+  return {} unless File.exist?(file)
 
   yaml = YAML::load_file(file)
   
