@@ -22,10 +22,20 @@ def load_config(file)
   yaml
 end
 
+def argv(key)
+  start = "--#{key}="
+
+  value = ARGV.detect do |v|
+    v =~ /^#{Regexp.escape(start)}/
+  end
+
+  value[start.size..-1] if value
+end
+
 local_config = load_config('.helm_config')
 
 load_config('~/.helm_config') do |opts|
-  opts[local_config['url']]
+  opts[argv(:url)]
 end
 
 Helm::Commands.const_get(ARGV.first.capitalize).new(Helm::Session.new).run
