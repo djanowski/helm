@@ -3,6 +3,10 @@ module Helm
     class Command
       attr_reader :session
       
+      def parameters(*names)
+        session.configure_params(*names)
+      end
+
       def initialize(session)
         @session = session
       end

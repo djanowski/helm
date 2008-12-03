@@ -2,6 +2,8 @@ module Helm
   module Commands
     class Assign < Command
       def run
+        parameters :ticket, :milestone
+
         ticket = session.ticket
 
         if session.milestone

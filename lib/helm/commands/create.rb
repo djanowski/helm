@@ -48,11 +48,7 @@ module Helm
           ticket.body = ticket.body.strip
           ticket.save
           puts "##{ticket.id} Created"
-          # puts "Title: #{ticket.title}"
-          # puts "Description: #{ticket.body}"
-          # puts "URL: http://citrusbyte.lighthouseapp.com/projects/18337/tickets/#{ticket.id}"
         end
-      
     end
   end
 end

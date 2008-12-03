@@ -29,6 +29,20 @@ module Helm
       configure
     end
 
+    # Configure the set of params to be used by the active command.
+    def configure_params(*names)
+      @params = {}
+      names.each_with_index do |name, index|
+        @params[name] = index
+      end
+    end
+
+    # Access positional parameters sent to the active command
+    # based on the order specified in configure_params.
+    def [](name)
+      ARGV[@params[name].succ]
+    end
+
     def project
       @project ||= Lighthouse::Project.find(:all).detect {|p| p.name == options.project }
     end
@@ -38,19 +52,15 @@ module Helm
     end
 
     def ticket(id = nil)
-      Lighthouse::Ticket.find(id || ticket_id, :params => {:project_id => project.id})
+      Lighthouse::Ticket.find(id || self[:ticket], :params => {:project_id => project.id})
     end
 
     def milestone(id = nil)
       if id
         Lighthouse::Milestone.find(id)
       else
-        @milestone ||= Lighthouse::Milestone.find(:all, :params => {:project_id => project.id}).detect {|m| m.title == ARGV[2] }
+        @milestone ||= Lighthouse::Milestone.find(:all, :params => {:project_id => project.id}).detect {|m| m.title == self[:milestone] }
       end
-    end
-
-    def ticket_id
-      ARGV[1].to_i
     end
 
     def user(id = nil)
