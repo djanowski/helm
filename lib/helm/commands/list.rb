@@ -4,7 +4,7 @@ module Helm
       def run
         parameters :filter
 
-        filter = session[:filter] || "responsible:me state:open"
+        filter = session[:filter] || "responsible:me state:open milestone:next"
 
         puts "Tickets with filter \"#{filter}\""
         session.tickets(filter).each do |ticket|
