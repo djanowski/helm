@@ -40,7 +40,7 @@ module Helm
     # Access positional parameters sent to the active command
     # based on the order specified in configure_params.
     def [](name)
-      ARGV[@params[name].succ]
+      arguments[@params[name].succ]
     end
 
     def project
@@ -53,6 +53,10 @@ module Helm
 
     def ticket(id = nil)
       Lighthouse::Ticket.find(id || self[:ticket], :params => {:project_id => project.id})
+    end
+
+    def tickets(filter = nil)
+      project.tickets(:q => filter)
     end
 
     def milestone(id = nil)
@@ -94,5 +98,10 @@ module Helm
         Lighthouse.token = token
       end
 
+      def arguments
+        @arguments ||= ARGV.select do |argv|
+          argv !~ /^--/
+        end
+      end
   end
 end
