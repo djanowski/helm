@@ -6,6 +6,16 @@ require File.dirname(__FILE__) + '/../lib/helm'
 
 require 'yaml'
 
+def argv(key)
+  start = "--#{key}="
+
+  value = ARGV.detect do |v|
+    v =~ /^#{Regexp.escape(start)}/
+  end
+
+  value[start.size..-1] if value
+end
+
 def load_config(file)
   file = File.expand_path(file)
 
@@ -16,20 +26,10 @@ def load_config(file)
   yaml = yield(yaml) if block_given?
 
   yaml.each do |k,v|
-    ARGV << "--#{k}=#{v}"
+    ARGV << "--#{k}=#{v}" unless argv(k)
   end if yaml
 
   yaml
-end
-
-def argv(key)
-  start = "--#{key}="
-
-  value = ARGV.detect do |v|
-    v =~ /^#{Regexp.escape(start)}/
-  end
-
-  value[start.size..-1] if value
 end
 
 local_config = load_config('.helm_config')
