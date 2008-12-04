@@ -14,9 +14,7 @@ module Helm
           form.file_uploads.first.file_name = filename
 
           agent.submit(form)
-        end if false
-
-        puts "EMBED" if argv('--embed')
+        end
       end
 
       protected
