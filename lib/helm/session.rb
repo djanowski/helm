@@ -17,6 +17,16 @@ module Helm
           desc 'The token to authenticate against the server'
         end
 
+        option :username do
+          long '--username'
+          desc 'The username to authenticate against the server'
+        end
+
+        option :password do
+          long '--password'
+          desc 'The username to authenticate against the server'
+        end
+
         option :project do
           long '--project'
           short '-p'
@@ -75,20 +85,32 @@ module Helm
       end
     end
 
+    def uri
+      @uri ||= URI.parse(url)
+    end
+
+    def url
+      options.url
+    end
+
+    def username
+      options.username
+    end
+
+    def password
+      options.password
+    end
+
+    def ticket_path(id = nil)
+      Lighthouse::Ticket.element_path(id || self[:ticket], {:project_id => project.id}).sub(/\.xml$/, '')
+    end
+
     protected
 
       def account
         @account ||= uri.host.split('.').first
       end
       
-      def uri
-        @uri ||= URI.parse(url)
-      end
-
-      def url
-        options.url
-      end
-
       def token
         options.token
       end
