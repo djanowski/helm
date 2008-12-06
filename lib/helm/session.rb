@@ -4,6 +4,7 @@ require 'choice'
 module Helm
   class Session
     attr_reader :options
+    attr_reader :cache
 
     def initialize
       Choice.options do
@@ -35,6 +36,7 @@ module Helm
       end
 
       @options = Choice.choices
+      @cache = Drawer.open!('.helm/cache')
 
       configure
     end

@@ -1,41 +1,27 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-
-require File.dirname(__FILE__) + '/../lib/helm'
-
-require 'yaml'
+require 'drawer'
+require 'helm'
 
 def argv(key)
   start = "--#{key}="
-
-  value = ARGV.detect do |v|
-    v =~ /^#{Regexp.escape(start)}/
-  end
-
+  value = ARGV.detect { |v| v =~ /^#{Regexp.escape(start)}/ }
   value[start.size..-1] if value
 end
 
-def load_config(file)
-  file = File.expand_path(file)
-
-  return {} unless File.exist?(file)
-
-  yaml = YAML::load_file(file)
-  
-  yaml = yield(yaml) if block_given?
-
-  yaml.each do |k,v|
+def append_arguments(args)
+  args.each do |k, v|
     ARGV << "--#{k}=#{v}" unless argv(k)
-  end if yaml
-
-  yaml
+  end
 end
 
-local_config = load_config('.helm_config')
+Drawer.open('.helm/config') do |config|
+  append_arguments(config.cache)
+end
 
-load_config('~/.helm_config') do |opts|
-  opts[argv(:url)]
+Drawer.open('~/.helm_config') do |config|
+  append_arguments(config.get(argv(:url)))
 end
 
 Helm::Commands.const_get(ARGV.first.capitalize).new(Helm::Session.new).run

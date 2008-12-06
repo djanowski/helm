@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'helm'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
   s.summary = %{A command-line tool for Lighthouse.}
   s.date = %q{2008-11-06}
   s.author = "Damian Janowski"
@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.executables = "helm"
 
   s.add_dependency("choice", "0.1.2")
+  s.add_dependency("soveran-drawer", ">= 0.0.4")
 
   s.extra_rdoc_files = ["README.textile"]
   s.has_rdoc = false

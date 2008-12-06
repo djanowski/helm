@@ -8,8 +8,15 @@ module Helm
 
         puts "Tickets with filter \"#{filter}\""
         session.tickets(filter).each do |ticket|
-          puts "  ##{ticket.id} #{ticket.title}"
+          assignee = ticket.assigned_user_id ?
+            find_user(ticket.assigned_user_id).name : "Unassigned"
+          puts "  ##{ticket.id} #{ticket.title} (#{assignee})"
         end
+      end
+
+      def find_user(id)
+        user_id = "user-%s" % id
+        cache.get(user_id) || cache.set(user_id, session.user(id))
       end
     end
   end
