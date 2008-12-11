@@ -1,5 +1,7 @@
 require 'rubygems'
-require 'activesupport'
+
+gem 'activeresource', '>= 2.2.2'
+
 require 'activeresource'
 
 # Ruby lib for working with the Lighthouse API's XML interface.  
