@@ -12,14 +12,14 @@ Although Helm can receive all the parameters it needs from the command line, usu
 
 1. Edit `~/.helm_config` and add your credentials for the account. You can provide a token (recommended) or your username and password (this is necessary if you want to use scraping commands like `upload`).
 
-        http://account.lighthouseapp.com:
-          token: API token
+        http://your-account.lighthouseapp.com:
+          token: your API token
           username: username
           password: password
 
 2. Edit your project's `.helm_config`.
 
-        url: http://account.lighthouseapp.com
+        url: http://your-account.lighthouseapp.com
         project: "Your project's full name"
 
 3. Try it.
@@ -35,6 +35,7 @@ This *will* change.
   
 Examples:
 
+    $ helm list
     $ helm list state:open
     $ helm list "responsible:me state:open"
 
