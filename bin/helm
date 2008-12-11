@@ -1,5 +1,36 @@
 #!/usr/bin/env ruby
 
+if ARGV.empty?
+  puts <<-eos
+    Available helm commands:
+      # List tickets. The default filter
+      # is "responsible:me state:open milestone:next".
+      $ helm list [filter]
+
+      # Display information about a particular ticket.
+      $ helm info [ticket id]
+
+      # Display information about a particular milestone.
+      $ helm show [milestone id]
+
+      # Assign a ticket to self.
+      $ helm assign [ticket id]
+
+      # Assign a ticket to another user.
+      $ helm assign [ticket id] [user id]
+
+
+      # Assign a ticket to a milestone.
+      $ helm assign [ticket id] [milestone name]
+
+      # Create a new ticket.
+      $ echo "Ticket description" | helm create
+
+    Check http://github.com/djanowski/helm/ for more information.
+  eos
+  exit
+end
+
 require 'rubygems'
 require 'drawer'
 require 'helm'
@@ -16,11 +47,26 @@ def append_arguments(args)
   end
 end
 
-Drawer.open('.helm/config') do |config|
+def configure(file)
+  puts <<-eos
+    The configuration file #{file} doesn't exist.
+    Please refer to the documentation to see what to
+    write in that file.
+  eos
+  exit
+end
+
+custom_config = File.expand_path('.helm_config')
+global_config = File.expand_path('~/.helm/config')
+
+configure(custom_config) unless File.exists?(custom_config)
+configure(global_config) unless File.exists?(global_config)
+
+Drawer.open(custom_config) do |config|
   append_arguments(config.cache)
 end
 
-Drawer.open('~/.helm_config') do |config|
+Drawer.open(global_config) do |config|
   append_arguments(config.get(argv(:url)))
 end
 
