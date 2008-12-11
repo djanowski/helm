@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.executables = "helm"
 
   s.add_dependency("choice", "0.1.2")
-  s.add_dependency("soveran-drawer", ">= 0.0.4")
+  s.add_dependency("soveran-drawer", ">= 0.0.5")
   s.add_dependency("activeresource", ">= 2.2.2")
 
   s.extra_rdoc_files = ["README.markdown"]

@@ -36,7 +36,7 @@ module Helm
       end
 
       @options = Choice.choices
-      @cache = Drawer.open!('.helm/cache')
+      @cache = Drawer.open!('~/.helm/cache')
 
       configure
     end
