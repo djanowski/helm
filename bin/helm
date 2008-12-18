@@ -32,8 +32,11 @@ if ARGV.empty?
 end
 
 require 'rubygems'
+
+gem 'soveran-drawer', '>= 0.0.5'
 require 'drawer'
-require 'helm'
+
+require File.join(File.dirname(__FILE__), '..', 'lib', 'helm')
 
 def argv(key)
   start = "--#{key}="
@@ -44,7 +47,7 @@ end
 def append_arguments(args)
   args.each do |k, v|
     ARGV << "--#{k}=#{v}" unless argv(k)
-  end
+  end if args
 end
 
 def configure(file)

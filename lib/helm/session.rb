@@ -71,12 +71,25 @@ module Helm
       project.tickets(:q => filter)
     end
 
-    def milestone(id = nil)
-      if id
-        Lighthouse::Milestone.find(id)
+    def milestone(*args)
+      # TODO: ugly
+      debugger
+
+      if args.empty?
+        milestone_by_title(self[:milestone])
+      elsif args.first.nil?
+        nil
+      elsif args.first.to_i.to_s == args.first.to_s
+        Lighthouse::Milestone.find(args.first, :params => {:project_id => project.id})
       else
-        @milestone ||= Lighthouse::Milestone.find(:all, :params => {:project_id => project.id}).detect {|m| m.title == self[:milestone] }
+        milestone_by_title(args.first)
       end
+    end
+
+    def milestone_by_title(title)
+      title = title.to_s
+
+      Lighthouse::Milestone.find(:all, :params => {:project_id => project.id}).detect {|m| m.title == title }
     end
 
     def user(id = nil)

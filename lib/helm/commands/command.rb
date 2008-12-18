@@ -14,6 +14,10 @@ module Helm
       def initialize(session)
         @session = session
       end
+
+      def format
+        @formatter ||= Helm::Formatter.new
+      end
     end
   end
 end
