@@ -73,7 +73,6 @@ module Helm
 
     def milestone(*args)
       # TODO: ugly
-      debugger
 
       if args.empty?
         milestone_by_title(self[:milestone])
