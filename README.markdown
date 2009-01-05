@@ -68,4 +68,4 @@ Examples:
 
 Contributing
 -------------
-Please report bugs, submit feedback and patches to "http://helm.lighthouseapp.com/projects/22826-helm":http://helm.lighthouseapp.com/projects/22826-helm.
+Please report bugs, submit feedback and patches to [http://helm.lighthouseapp.com/projects/22826-helm](http://helm.lighthouseapp.com/projects/22826-helm)
