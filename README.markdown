@@ -64,3 +64,8 @@ Examples:
 
     $ helm assign 13
     $ helm assign 13 [Lighthouse user ID]
+
+
+Contributing
+-------------
+Please report bugs, submit feedback and patches to "http://helm.lighthouseapp.com/projects/22826-helm":http://helm.lighthouseapp.com/projects/22826-helm.
