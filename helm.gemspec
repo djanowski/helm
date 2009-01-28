@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
 
   s.specification_version = 2 if s.respond_to? :specification_version=
 
-  s.files = ["lib/helm/commands/assign.rb", "lib/helm/commands/command.rb", "lib/helm/commands/create.rb", "lib/helm/commands/info.rb", "lib/helm/commands/list.rb", "lib/helm/commands/open.rb", "lib/helm/commands/resolve.rb", "lib/helm/commands/schedule.rb", "lib/helm/commands/show.rb", "lib/helm/commands/upload.rb", "lib/helm/formatter.rb", "lib/helm/lighthouse.rb", "lib/helm/project.rb", "lib/helm/session.rb", "lib/helm.rb", "README.html", "README.markdown", "README.textile", "LICENSE", "Rakefile"]
+  s.files = ["lib/helm/commands/assign.rb", "lib/helm/commands/command.rb", "lib/helm/commands/create.rb", "lib/helm/commands/info.rb", "lib/helm/commands/list.rb", "lib/helm/commands/open.rb", "lib/helm/commands/resolve.rb", "lib/helm/commands/schedule.rb", "lib/helm/commands/show.rb", "lib/helm/commands/status.rb", "lib/helm/commands/upload.rb", "lib/helm/formatter.rb", "lib/helm/lighthouse.rb", "lib/helm/project.rb", "lib/helm/session.rb", "lib/helm.rb", "README.markdown", "LICENSE", "Rakefile"]
 
   s.require_paths = ['lib']
 
