@@ -22,6 +22,9 @@ if ARGV.empty?
       # Assign a ticket to another user.
       $ helm assign [ticket id] [user id]
 
+      # Change the status of a ticket.
+      $ helm status [ticket id] [new|open|resolved|...]
+
       # Assign a ticket to a milestone.
       $ helm schedule [ticket id] [milestone name]
 
@@ -35,8 +38,7 @@ end
 
 require 'rubygems'
 
-gem 'soveran-drawer', '>= 0.0.5'
-require 'drawer'
+require File.join('vendor', 'drawer')
 
 require File.join(File.dirname(__FILE__), '..', 'lib', 'helm')
 
