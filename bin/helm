@@ -13,15 +13,17 @@ if ARGV.empty?
       # Display information about a particular milestone.
       $ helm show [milestone id]
 
+      # Open the ticket in a web browser (`open` must be available).
+      $ helm open [ticket id]
+
       # Assign a ticket to self.
       $ helm assign [ticket id]
 
       # Assign a ticket to another user.
       $ helm assign [ticket id] [user id]
 
-
       # Assign a ticket to a milestone.
-      $ helm assign [ticket id] [milestone name]
+      $ helm schedule [ticket id] [milestone name]
 
       # Create a new ticket.
       $ echo "Ticket description" | helm create

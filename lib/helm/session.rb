@@ -56,7 +56,14 @@ module Helm
     end
 
     def project
-      @project ||= Lighthouse::Project.find(:all).detect {|p| p.name == options.project }
+      @project ||= Lighthouse::Project.find(project_id)
+    end
+
+    def project_id
+      cache.get("#{url}---#{options.project}") do
+        @project = Lighthouse::Project.find(:all).detect {|p| p.name == options.project }
+        @project.id
+      end
     end
 
     def new_ticket
