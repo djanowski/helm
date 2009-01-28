@@ -38,7 +38,7 @@ end
 
 require 'rubygems'
 
-require File.join('vendor', 'drawer')
+require File.join(File.dirname(__FILE__), '..', 'vendor', 'drawer')
 
 require File.join(File.dirname(__FILE__), '..', 'lib', 'helm')
 
